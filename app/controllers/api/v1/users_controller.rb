@@ -5,9 +5,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-
-    if @user
+    if @user = User.find(params[:id])
       render json: @user
     else
       render json: { status: 'error', message: "can't find a user with the id #{params[:id]} " }
@@ -27,26 +25,35 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    @user.update(
-      name: params[:name],
-      email: params[:email]
-    )
-    if @user.save
-      render json: @user
-    else
-      render json: { status: 'error', message: @user.errors.full_messages }
+    if @user = User.find(params[:id])
+      @user.update(
+        name: params[:name],
+        email: params[:email]
+      )
+      if @user.save
+        render json: @user
+      else
+        render json: { status: 'error', message: @user.errors.full_messages }
+      end
+    else 
+      render json: { status: 'error', message: "can't find a user with the id #{params[:id]} " }
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
-
-    if @user
+    if @user = User.find(params[:id])
       @user.destroy
-      @users = User.all
-      render json: @users
+      render json: {status: "success"}
     else
+      render json: { status: 'error', message: "can't find a user with the id #{params[:id]} " }
+    end
+  end
+
+  def user_orders
+    if @user = User.find(params[:id])
+      @orders = @user.orders
+      render json: @orders
+    else 
       render json: { status: 'error', message: "can't find a user with the id #{params[:id]} " }
     end
   end

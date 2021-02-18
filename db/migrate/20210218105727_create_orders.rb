@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.references(:bicycle)  
       t.string :product_name 
       t.string :product_image_url
-      t.string :options , array: true, default: []
+      t.json :options 
       t.timestamps
     end
   end

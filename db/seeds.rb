@@ -1,5 +1,7 @@
-menu1 = Bicycle.create(name: "Chipotle Nachos" , model: "Chipotle", image_url:"Build a plate of nachos with all of your favorite fixings")
-menu2 = Bicycle.create(name: "Starbucks butterbeer Frappuccino", model: "Starbucks", image_url:"Combine three pumps of toffee nut syrup and three pumps of caramel with a Crème Frappuccino base")
-menu3 = Bicycle.create(name: "Skittles", model: "Jamba Juice", image_url:"A mixture of lemonade, lime sherbet, frozen yogurt, and strawberries")
+# menu1 = Bicycle.create(name: "Specialized Turbo Levo Comp 29'' E- bike MTB-bike 2021" , model: "MTB-bike", image_url:"https://cdn.hibike.com/image/product/EMTF/EMTF_Se19LEVC_95221-54-il.jpg" , description: "The Levo SL is a new, light generation of e-mountain bikes that uses the Stumpjumper's fast and versatile platform ... and offers just enough power to experience a completely new ride. The Levo SL Comp Carbon comes with a carbon frame, complete FOX suspension and SRAM NX 12-speed drive.")
+# menu2 = Bicycle.create(name: "Trek Rail 7 29 E- bike MTB bike 2021", model: "Trek", image_url:"https://cdn.hibike.com/image/product/EMTF/EMTF_Se09LESCC_S-hbl-ro_Levo_SL_Comp_Carbon_MJ20-il.jpg")
+# menu3 = Bicycle.create(name: "Trek Rail 9.8 XT 29 E- bike MTB bike 2021", model: "Trek", image_url:"https://cdn.hibike.com/image/product/EMTF/EMTF_Tk19RL98XT_ro-ga_Rail_9.8_XT_MJ21-il.jpg")
 
-user1 = User.create(name: "mahmoud", email: "mahmoudmohammad717@gmail.com")
+# user1 = User.create(name: "Admin", email: "admin@admin.com" ,admin: true )
+
+# #order1 = Order.create(user_id: 1, bicycle_id: 1, product_name: "Specialized Turbo Levo Comp 29'' E- bike MTB-bike 2021", product_image_url: "https://cdn.hibike.com/image/product/EMTF/EMTF_Se19LEVC_95221-54-il.jpg", options: {options: [{option_name: "rem_size", option_value: 17, sub_options: [{option_name: "color", option_value: "green", sub_options: []}, {option_name: "color", option_value: "blue", sub_options: []}]}, {option_name: "rem_size", option_value: 17, sub_options: [{option_name: "color", option_value: "green", sub_options: []}, {option_name: "color", option_value: "blue", sub_options: []}]}] } )

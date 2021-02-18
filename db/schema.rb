@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_105727) do
+ActiveRecord::Schema.define(version: 2021_02_18_121921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 2021_02_18_105727) do
     t.string "name"
     t.string "model"
     t.string "image_url"
+    t.json "options"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "options", default: [], array: true
   end
 
   create_table "favourites", force: :cascade do |t|
@@ -38,7 +39,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_105727) do
     t.bigint "bicycle_id"
     t.string "product_name"
     t.string "product_image_url"
-    t.string "options", default: [], array: true
+    t.json "options"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bicycle_id"], name: "index_orders_on_bicycle_id"
@@ -48,9 +49,9 @@ ActiveRecord::Schema.define(version: 2021_02_18_105727) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.boolean "admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin", default: false
   end
 
 end

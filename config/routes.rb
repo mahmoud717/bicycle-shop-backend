@@ -5,6 +5,9 @@ Rails.application.routes.draw do
         resources :users ,  only: [:index, :show, :create, :update, :destroy] do 
             resources :favourites, only: [:index, :create, :destroy]
         end
+        resources :orders, only: [:index, :show, :create, :update, :destroy]
       end
     end
+    get 'api/v1/users/:id/orders', to: 'users#user_orders'
+    get 'api/v1/bicycles/:id/orders', to: 'bicycles#bicycle_orders'
 end

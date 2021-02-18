@@ -28,16 +28,19 @@ class Api::V1::BicyclesController < ApplicationController
   end
 
   def update
-    @bicycle = Bicycle.find(params[:id])
-    @bicycle.update(
-      name: params[:name],
-      model: params[:model],
-      image_url: params[:image_url]
-    )
-    if @bicycle.save
-      render json: @bicycle
+    if @bicycle = Bicycle.find(params[:id])
+      @bicycle.update(
+        name: params[:name],
+        model: params[:model],
+        image_url: params[:image_url]
+      )
+      if @bicycle.save
+        render json: @bicycle
+      else
+        render json: { status: 'error', message: @bicycle.errors.full_messages }
+      end
     else
-      render json: { status: 'error', message: @bicycle.errors.full_messages }
+      render json: { status: 'error', message: "can't find a bicycle with the id #{params[:id]}" }
     end
   end
 
@@ -47,6 +50,15 @@ class Api::V1::BicyclesController < ApplicationController
     if @bicycle
       @bicycle.destroy
       render json: @bicycles
+    else
+      render json: { status: 'error', message: "can't find a user with the id #{params[:id]}" }
+    end
+  end
+
+  def bicycle_orders
+    if @bicycle = Bicycle.find(params[:id])
+      @orders = @bicycle.orders
+      render json: @orders
     else
       render json: { status: 'error', message: "can't find a user with the id #{params[:id]}" }
     end
