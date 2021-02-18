@@ -17,7 +17,8 @@ class Api::V1::BicyclesController < ApplicationController
     @bicycle = Bicycle.create(
       name: params[:name],
       model: params[:model],
-      image_url: params[:image_url]
+      image_url: params[:image_url], 
+      options: params[:options]
     )
     if @bicycle.save
       render json: @bicycle
