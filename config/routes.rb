@@ -8,6 +8,6 @@ Rails.application.routes.draw do
         resources :orders, only: [:index, :show, :create, :update, :destroy]
       end
     end
-    get 'api/v1/users/:id/orders', to: 'users#user_orders'
-    get 'api/v1/bicycles/:id/orders', to: 'bicycles#bicycle_orders'
+    get 'api/v1/users/:id/orders', to: 'api/v1/users#user_orders'
+    get 'api/v1/bicycles/:id/orders', to: 'api/v1/bicycles#bicycle_orders'
 end
