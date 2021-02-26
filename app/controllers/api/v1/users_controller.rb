@@ -4,6 +4,15 @@ class Api::V1::UsersController < ApplicationController
     render json: @users
   end
 
+  def search_user
+    @user = User.find_by email: params[:email]
+    if @user 
+      render json: @user
+    else
+      render json:  { status: 'error', message: "can't find a user with the email #{params[:email]} " }
+    end
+  end
+
   def show
     if @user = User.find(params[:id])
       render json: @user
@@ -13,12 +22,19 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(
+    @user = User.new(
       name: params[:name],
-      email: params[:email]
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
     )
     if @user.save
-      render json: @user
+      session[:user_id] = @user.id
+      render json: {
+        status: :created,
+        user: @user,
+        orders: [],
+      }
     else
       render json: { status: 'error', message: @user.errors.full_messages }
     end
