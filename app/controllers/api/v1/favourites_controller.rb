@@ -1,4 +1,5 @@
 class Api::V1::FavouritesController < ApplicationController
+
   def index
     @user_favourites = User.find(params[:user_id]).favourites
     render json: @user_favourites

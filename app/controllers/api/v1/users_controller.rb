@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :authorized, except: [:create ]
   def index
     @users = User.all
     render json: @users
@@ -29,11 +30,13 @@ class Api::V1::UsersController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
     if @user.save
-      session[:user_id] = @user.id
+      session[:user_id] = @user.id,
+      token = encode_token({user_id: @user.id})
       render json: {
         status: :created,
         user: @user,
         orders: [],
+        token: token
       }
     else
       render json: { status: 'error', message: @user.errors.full_messages }

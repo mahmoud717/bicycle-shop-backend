@@ -17,6 +17,9 @@ gem 'rack-cors'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 
+# JWT gem for auth 
+
+gem 'jwt'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
