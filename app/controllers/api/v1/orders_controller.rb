@@ -23,7 +23,8 @@ class Api::V1::OrdersController < ApplicationController
               )
 
         if @order.save 
-             render json: @order
+            @user = User.find(params[:user_id])
+             render json: {status: 'success', orders: @user.orders }
         else
             render json: {status: "error", message: @order.errors.full_messages}
         end

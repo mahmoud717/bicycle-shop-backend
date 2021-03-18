@@ -27,7 +27,8 @@ class Api::V1::UsersController < ApplicationController
       name: params[:name],
       email: params[:email],
       password: params[:password],
-      password_confirmation: params[:password_confirmation]
+      password_confirmation: params[:password_confirmation],
+      image_url: params[:image_url]
     )
     if @user.save
       session[:user_id] = @user.id,
@@ -47,7 +48,10 @@ class Api::V1::UsersController < ApplicationController
     if @user = User.find(params[:id])
       @user.update(
         name: params[:name],
-        email: params[:email]
+        email: params[:email],
+        password: params[:password],
+        password_confirmation: params[:password_confirmation],
+        image_url: params[:image_url]
       )
       if @user.save
         render json: @user

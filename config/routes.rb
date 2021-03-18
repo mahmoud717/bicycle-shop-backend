@@ -9,8 +9,20 @@ Rails.application.routes.draw do
         resources :orders, only: [:index, :show, :create, :update, :destroy]
       end
     end
-    get 'api/v1/users/:id/orders', to: 'api/v1/users#user_orders'
-    get 'api/v1/bicycles/:id/orders', to: 'api/v1/bicycles#bicycle_orders'
+
+    # log the user out and destroy the cookie (the cookie deletion is in the frontend part)
     delete 'api/v1/sessions/logout', to: 'api/v1/sessions#logout'
+
+    # get all orders made by user
+    get 'api/v1/users/:id/orders', to: 'api/v1/users#user_orders'
+    
+    # check if the user is logged in throw the JWT cookie
     get 'api/v1/sessions/logged_in', to: 'api/v1/sessions#logged_in'
+
+    # get bicycle options and orders
+    get 'api/v1/bicycles/:id/options', to: 'api/v1/bicycles#bicycle_options'
+    get 'api/v1/bicycles/:id/orders', to: 'api/v1/bicycles#bicycle_orders'
+
+    # create an option
+    post 'api/v1/bicycles/:id/createOption', to: 'api/v1/bicycles#create_option'
 end
