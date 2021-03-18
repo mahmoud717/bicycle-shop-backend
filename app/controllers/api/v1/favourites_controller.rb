@@ -19,6 +19,15 @@ class Api::V1::FavouritesController < ApplicationController
     render json: @user_fav_bikes
   end
 
+  def show 
+    @user_favourites = User.find(params[:user_id]).favourites
+    @bike = @userFavourites.fine(params[:id])
+    if @bike 
+      render json: { status: true, bike: @bike}
+    else
+      render json: {status: false}
+    end
+  end
   def create
     @bicycle = Bicycle.find params[:bicycle_id]
     if @bicycle
