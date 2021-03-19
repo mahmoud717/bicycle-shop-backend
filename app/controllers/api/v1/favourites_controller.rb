@@ -20,10 +20,11 @@ class Api::V1::FavouritesController < ApplicationController
   end
 
   def show 
+
     @user_favourites = User.find(params[:user_id]).favourites
-    @bike = @userFavourites.fine(params[:id])
+    @bike = @user_favourites.find_by(user_id: params[:user_id], bicycle_id: params[:id] ) if @user_favourites
     if @bike 
-      render json: { status: true, bike: @bike}
+      render json: { status: true}
     else
       render json: {status: false}
     end
@@ -40,10 +41,10 @@ class Api::V1::FavouritesController < ApplicationController
   end
 
   def destroy
-    @bicycle = @user_favourites.find  params[:bicycle_id]
+    @user_favourites = User.find(params[:user_id]).favourites
+    @bicycle = @user_favourites.find_by(user_id: params[:user_id], bicycle_id: params[:id] ) if @user_favourites
     if @bicycle
-      @user_favourites = User.find(params[:user_id]).favourites
-      @user_favourites.delete(@bicycle)
+     @user_favourites.delete(@bicycle.id)
       render json: @user_favourites
     else
       render json: { status: 'error', message: "can't find a Bicycle with the id #{params[:id]}" }
