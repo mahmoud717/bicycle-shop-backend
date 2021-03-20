@@ -17,7 +17,7 @@ gem 'rack-cors'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 
-# JWT gem for auth 
+# JWT gem for auth
 
 gem 'jwt'
 # Use Active Storage variant
@@ -32,8 +32,16 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara', '~> 3.29'
+  gem 'factory_bot_rails', '~> 5.1'
+  gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
 end
 
+group :test do
+  gem 'database_cleaner'
+  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'shoulda-matchers', '~> 4.0'
+end
 group :development do
   gem 'listen', '~> 3.3'
   gem 'rubocop', '~>0.81.0'
