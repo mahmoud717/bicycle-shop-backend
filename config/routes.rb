@@ -3,7 +3,7 @@ Rails.application.routes.draw do
       namespace :v1, :defaults => {:format => :json} do
         resources :bicycles ,  only: [:index, :show, :create, :update, :destroy]
         resources :users ,  only: [:index, :show, :create, :update, :destroy] do 
-            resources :favourites, only: [:index, :create, :destroy]
+            resources :favourites, only: [:index, :create, :destroy, :show]
         end
         resources :sessions , only: [:create]
         resources :orders, only: [:index, :show, :create, :update, :destroy]
