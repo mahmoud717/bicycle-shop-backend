@@ -4,15 +4,15 @@ class Api::V1::FavouritesController < ApplicationController
     @user_favourites = User.find(params[:user_id]).favourites
     @user_fav_bikes = []
 
-    bike_Ids = []
+    bike_ids = []
     if @user_favourites.length
       @user_favourites.each do |el|
-      bike_Ids.push(el.bicycle_id)
+      bike_ids.push(el.bicycle_id)
       end
     end
 
-    if bike_Ids.length
-      bike_Ids.each do |el|
+    if bike_ids.length
+      bike_ids.each do |el|
         @user_fav_bikes.push(Bicycle.find(el))
       end
     end
