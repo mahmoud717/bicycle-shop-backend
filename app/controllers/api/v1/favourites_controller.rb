@@ -1,5 +1,4 @@
 class Api::V1::FavouritesController < ApplicationController
-
   def index
     @user_favourites = User.find(params[:user_id]).favourites
     @user_fav_bikes = []
@@ -19,16 +18,16 @@ class Api::V1::FavouritesController < ApplicationController
     render json: @user_fav_bikes
   end
 
-  def show 
-
+  def show
     @user_favourites = User.find(params[:user_id]).favourites
-    @bike = @user_favourites.find_by(user_id: params[:user_id], bicycle_id: params[:id] ) if @user_favourites
-    if @bike 
-      render json: { status: true}
+    @bike = @user_favourites.find_by(user_id: params[:user_id], bicycle_id: params[:id]) if @user_favourites
+    if @bike
+      render json: { status: true }
     else
-      render json: {status: false}
+      render json: { status: false }
     end
   end
+
   def create
     @bicycle = Bicycle.find params[:bicycle_id]
     if @bicycle
@@ -42,9 +41,9 @@ class Api::V1::FavouritesController < ApplicationController
 
   def destroy
     @user_favourites = User.find(params[:user_id]).favourites
-    @bicycle = @user_favourites.find_by(user_id: params[:user_id], bicycle_id: params[:id] ) if @user_favourites
+    @bicycle = @user_favourites.find_by(user_id: params[:user_id], bicycle_id: params[:id]) if @user_favourites
     if @bicycle
-     @user_favourites.delete(@bicycle.id)
+      @user_favourites.delete(@bicycle.id)
       render json: @user_favourites
     else
       render json: { status: 'error', message: "can't find a Bicycle with the id #{params[:id]}" }

@@ -1,5 +1,4 @@
 class Api::V1::BicyclesController < ApplicationController
-
   def index
     @bicycles = Bicycle.all
     render json: { bicycles: @bicycles, count: @bicycles.count }
@@ -8,7 +7,7 @@ class Api::V1::BicyclesController < ApplicationController
   def show
     @bicycle = Bicycle.find(params[:id])
     if @bicycle
-      render json: {bicycle: @bicycle, options: @bicycle.options}
+      render json: { bicycle: @bicycle, options: @bicycle.options }
     else
       render json: { status: 'error', message: "can't find a bicycle with the id #{params[:id]}" }
     end
@@ -18,7 +17,7 @@ class Api::V1::BicyclesController < ApplicationController
     @bicycle = Bicycle.new(
       name: params[:name],
       model: params[:model],
-      image_url: params[:image_url], 
+      image_url: params[:image_url],
       description: params[:description]
     )
     if @bicycle.save
@@ -29,7 +28,8 @@ class Api::V1::BicyclesController < ApplicationController
   end
 
   def update
-    if @bicycle = Bicycle.find(params[:id])
+    @bicycle = Bicycle.find(params[:id])
+    if @bicycle
       @bicycle.update(
         name: params[:name],
         model: params[:model],
@@ -50,7 +50,7 @@ class Api::V1::BicyclesController < ApplicationController
     @bicycle = Bicycle.find(params[:id])
     if @bicycle
       @bicycle.destroy
-      render json: {status: 'success'}
+      render json: { status: 'success' }
     else
       render json: { status: 'error', message: "can't find a user with the id #{params[:id]}" }
     end
@@ -66,7 +66,8 @@ class Api::V1::BicyclesController < ApplicationController
   end
 
   def bicycle_orders
-    if @bicycle = Bicycle.find(params[:id])
+    @bicycle = Bicycle.find(params[:id])
+    if @bicycle
       @orders = @bicycle.orders
       render json: @orders
     else
@@ -74,27 +75,26 @@ class Api::V1::BicyclesController < ApplicationController
     end
   end
 
-  def create_option 
+  def create_option
     @level = 1
     @parent_id = nil
-    if params[:parent_id] != nil && params[:parent_id] != ""
+    if !params[:parent_id].nil? && params[:parent_id] != ''
       @parent_id = params[:parent_id]
       @parent = Option.find(@parent_id)
-      @level = @parent.level + 1 
+      @level = @parent.level + 1
     end
-      @option = Option.new(
-        name: params[:name],
-        value: params[:value],
-        parent_id: @parent_id,
-        level: @level,
-        bicycle_id: params[:bicycle_id]
-      )
-      if @option.save
-        @bicycle = Bicycle.find(params[:id])
-        render json: {status: 'success', options: @bicycle.options }
-      else 
-        render json: { status: 'error', message: "can't create the option" }
-      end
-    
+    @option = Option.new(
+      name: params[:name],
+      value: params[:value],
+      parent_id: @parent_id,
+      level: @level,
+      bicycle_id: params[:bicycle_id]
+    )
+    if @option.save
+      @bicycle = Bicycle.find(params[:id])
+      render json: { status: 'success', options: @bicycle.options }
+    else
+      render json: { status: 'error', message: "can't create the option" }
+    end
   end
 end

@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authorized, except: [:create ]
+  before_action :authorized, except: [:create]
   def index
     @users = User.all
     render json: @users
@@ -7,15 +7,16 @@ class Api::V1::UsersController < ApplicationController
 
   def search_user
     @user = User.find_by email: params[:email]
-    if @user 
+    if @user
       render json: @user
     else
-      render json:  { status: 'error', message: "can't find a user with the email #{params[:email]} " }
+      render json: { status: 'error', message: "can't find a user with the email #{params[:email]} " }
     end
   end
 
   def show
-    if @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if @user
       render json: @user
     else
       render json: { status: 'error', message: "can't find a user with the id #{params[:id]} " }
@@ -32,7 +33,7 @@ class Api::V1::UsersController < ApplicationController
     )
     if @user.save
       session[:user_id] = @user.id,
-      token = encode_token({user_id: @user.id})
+                          token = encode_token({ user_id: @user.id })
       render json: {
         status: :created,
         user: @user,
@@ -45,7 +46,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if @user
       @user.update(
         name: params[:name],
         email: params[:email],
@@ -58,25 +60,27 @@ class Api::V1::UsersController < ApplicationController
       else
         render json: { status: 'error', message: @user.errors.full_messages }
       end
-    else 
+    else
       render json: { status: 'error', message: "can't find a user with the id #{params[:id]} " }
     end
   end
 
   def destroy
-    if @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if @user
       @user.destroy
-      render json: {status: "success"}
+      render json: { status: 'success' }
     else
       render json: { status: 'error', message: "can't find a user with the id #{params[:id]} " }
     end
   end
 
   def user_orders
-    if @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if @user
       @orders = @user.orders
       render json: @orders
-    else 
+    else
       render json: { status: 'error', message: "can't find a user with the id #{params[:id]} " }
     end
   end
