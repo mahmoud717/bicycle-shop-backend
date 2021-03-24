@@ -10,7 +10,7 @@ This is a rails restful api created to serve data to the frontend react part of 
 
 ## `Live Demo:`
 
-[heroku](<https://bicycle-shop-backend.herokuapp.com/api/v1/>
+[heroku](<https://bicycle-shop-backend.herokuapp.com/api/v1/>)
 
 
 
